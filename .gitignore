@@ -2,4 +2,5 @@ model_detect_image.keras
 PredictImage/static/models/model_detect_image.keras
 trainmodel_copy.ipynb
 main.ipynb
-Data
+Data/image_test
+Data/A_Z Handwritten Data.csv
