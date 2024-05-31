@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Image</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>Upload Image for Prediction</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Predict</button>
+    </form>
+    {% if result %}
+        <h1>Image</h1>
+        <img src="{{ url_image }}" alt="Your Image">
+        <h2>Prediction Result:</h2>
+        <p>{{ result }}</p>
+    {% endif %}
+</body>
+</html>
