@@ -8,7 +8,7 @@ Giải nén file và lưu vào thư mục Data (đường dẫn là : Data/A_Z H
 Chạy file trainmodel.ipynb để tạo fille model
 <br>
 <h2>Chạy web dự đoán</h2>
-<b>Chạy : </b>  py manage.py runserver 1234
+<b>Chạy : </b>  py manage.py runserver 1234 (chạy ở thư mục PredictImage)
 <br>
 <b>Link local để chạy dự án: </b> <a href="http://127.0.0.1:1234/">http://127.0.0.1:1234/<a>
 <p>Upload ảnh (chọn ảnh có trong thư mục Data/image_test) và click vào nút predict để hiển thị kết quả dự đoán chữ cái</p>
