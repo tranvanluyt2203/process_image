@@ -1,3 +1,11 @@
+<h1>Các file</h1>
+<br>
+Repair_trainmodel.ipynb : để lấy kết quả tạm có gì sửa sau
+<br>
+train_model.ipynb : Xây dựng mô hình, chọn các tham số
+<br>
+Repair_trainmodel_test_update.ipynb : đang chạy có gì chạy xong update lên, chỉ lần phần Data augmentation
+<hr>
 <h1>Hướng dẫn chạy Source</h1>
 <hr>
 <h2>Tải file data</h2>

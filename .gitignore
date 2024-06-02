@@ -1,6 +1,8 @@
-model_detect_image.keras
-PredictImage/static/models/model_detect_image.keras
+PredictImage/static/models
 trainmodel_copy.ipynb
 main.ipynb
 Data/image_test
 Data/A_Z Handwritten Data.csv
+model_detect_image copy.keras
+model_detect_image_with_augmentation.keras
+model_detect_image.keras

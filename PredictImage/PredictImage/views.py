@@ -13,8 +13,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL_PATH = os.path.join(BASE_DIR, "static", "models", "model_detect_image.keras")
 # Đọc mô hình từ file
 model = load_model(MODEL_PATH)
-characters_list = [chr(i) for i in range(ord("A"), ord("Z") + 1)]
-
+encode = {0:'A',1:'B',2:'C',3:'D',4:'E',5:'F',6:'G',7:'H',8:'I',9:'J',10:'K',11:'L',12:'M',13:'N',14:'O',15:'P',16:'Q',17:'R',18:'S',19:'T',20:'U',21:'V',22:'W',23:'X', 24:'Y',25:'Z'}
 
 def upload_image(request):
     result = None
@@ -44,41 +43,11 @@ def upload_image(request):
     )
 
 
-def otsu_thresholding(image):
-    # Tính histogram của ảnh
-    hist = np.histogram(image, bins=256, range=(0, 256))[0]
-    total_pixels = image.size
-    sum_total = np.sum(image)
-    sum_b = 0
-    weight_b = 0
-    max_variance = 0
-    optimal_threshold = 0
-    for threshold in range(256):
-        weight_f = np.sum(hist[:threshold]) / total_pixels
-        weight_b = 1 - weight_f
-        if weight_f == 0 or weight_b == 0:
-            continue
-        sum_f = np.sum(np.arange(threshold) * hist[:threshold])
-        mean_f = sum_f / (weight_f * total_pixels)
-        mean_b = (sum_total - sum_f) / (weight_b * total_pixels)
-        variance_between = weight_f * weight_b * ((mean_f - mean_b) ** 2)
-        if variance_between > max_variance:
-            max_variance = variance_between
-            optimal_threshold = threshold
-    return optimal_threshold
-
-
-def detect_characters(img):
-    image_gray = cv2.resize(img, (28, 28))
-    threshold_value = otsu_thresholding(image_gray)
-    binary_image = (image_gray > threshold_value).astype(
-        np.uint8
-    )  # > threshold = 1 else = 0
-    binary_image[binary_image == 1] = 255
-    image_text = cv2.resize(binary_image, (28, 28))
-    result_pred = np.argmax(model.predict(image_text.reshape(-1, 28, 28, 1)), axis=-1)
-    return characters_list[result_pred[0]]
-
-
 def process_image(image_path):
-    return detect_characters(np.array(Image.open(image_path)))
+    image_ = Image.open(image_path)
+    image_ = image_.convert("L")
+    image_ = np.array(image_.resize((28, 28))).astype(np.float32).reshape(28, 28, 1)/255
+    predict = model.predict(np.array([image_]))
+    label = np.argmax(predict,axis = 1)
+    
+    return encode[label[0]]
